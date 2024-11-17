@@ -2,33 +2,37 @@ import React, { useState, useEffect } from 'react'
 import { SidebarCommon } from './SidebarCommon'
 import { SidebarMenu } from './SidebarMenu'
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen: boolean
+}
 
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+  // const [isOpen, setIsOpen] = useState<boolean>(true)
 
-  // Escキーでサイドバーを閉じる
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape' && isOpen) {
-        setIsOpen(false)
-      }
-    }
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen)
+  // }
 
-    window.addEventListener('keydown', handleKeyDown)
+  // // Escキーでサイドバーを閉じる
+  // useEffect(() => {
+  //   const handleKeyDown = (event: KeyboardEvent): void => {
+  //     if (event.key === 'Escape' && isOpen) {
+  //       setIsOpen(false)
+  //     }
+  //   }
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen])
+  //   window.addEventListener('keydown', handleKeyDown)
+
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyDown)
+  //   }
+  // }, [isOpen])
 
   return (
     <div>
       {/* Hamburger Button */}
-      <button
+      {/* <button
         className='fixed top-4 left-4 z-50 flex flex-col items-center justify-between w-8 h-6 focus:outline-none'
         onClick={ toggleMenu }
       >
@@ -47,11 +51,11 @@ export const Sidebar: React.FC = () => {
             isOpen ? '-rotate-45 -translate-y-2.5 bg-white' : 'bg-black'
           }`}>
         </span>
-      </button>
+      </button> */}
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white transition-transform z-40 ${
+        className={`w-64 py-4 bg-white transition-transform z-40 ${
           isOpen ? 'translate-x-0' : '-translate-x-64'
         }`}
       >
@@ -61,12 +65,12 @@ export const Sidebar: React.FC = () => {
         <SidebarMenu />
       </div>
       {/* Overlay */}
-      { isOpen && (
+      {/* { isOpen && (
         <div
           className='fixed inset-0 bg-black bg-opacity-50 z-30'
           onClick={ toggleMenu }
         ></div>
-      )}
+      )} */}
     </div>
   )
 }
