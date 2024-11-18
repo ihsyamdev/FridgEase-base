@@ -6,7 +6,7 @@ export const AccountButton: React.FC = () => {
   return (
     <Router>
       <Link to="/account">
-        <AccountCircleIcon />
+        <AccountCircleIcon sx={{ fontSize: 64 }} />
       </Link>
     </Router>
   )
