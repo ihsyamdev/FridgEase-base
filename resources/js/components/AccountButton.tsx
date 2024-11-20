@@ -1,13 +1,11 @@
 import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const AccountButton: React.FC = () => {
   return (
-    <Router>
-      <Link to="/account">
-        <AccountCircleIcon sx={{ fontSize: 64 }} />
-      </Link>
-    </Router>
+    <Link to="/account">
+      <AccountCircleIcon sx={{ fontSize: 64 }} />
+    </Link>
   )
 }
