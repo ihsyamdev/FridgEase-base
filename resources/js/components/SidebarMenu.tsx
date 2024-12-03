@@ -24,7 +24,7 @@ export const SidebarMenu = () => {
         <li className='text-center'>
           <ul>
             <li className='py-2 bg-gray-400'>
-            <SidebarMenuItem to='' label='レシピを検索' icon='' />
+              <SidebarMenuItem to='' label='レシピを検索' icon='' />
             </li>
           </ul>
         </li>
@@ -34,7 +34,7 @@ export const SidebarMenu = () => {
         <li className='text-center'>
           <ul>
             <li className='py-2 bg-gray-400'>
-            <SidebarMenuItem to='' label='料理記録を確認' icon='' />
+              <SidebarMenuItem to='' label='料理記録を確認' icon='' />
             </li>
           </ul>
         </li>

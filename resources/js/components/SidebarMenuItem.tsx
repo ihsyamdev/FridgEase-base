@@ -9,11 +9,11 @@ interface MenuItemProps {
 
 export const SidebarMenuItem: React.FC<MenuItemProps> = ({ to, label, icon }) => {
   return (
-    <li>
+    // <li>
       <Link to={ to }>
         { icon && <span>{ icon }</span>}
         { label }
       </Link>
-    </li>
+    // </li>
   )
 }
