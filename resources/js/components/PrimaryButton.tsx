@@ -3,6 +3,7 @@ import React from 'react'
 interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large'
   children: React.ReactNode
+  onClick?: () => void 
 }
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({

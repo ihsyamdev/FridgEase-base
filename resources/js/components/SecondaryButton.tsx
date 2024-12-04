@@ -3,6 +3,7 @@ import React from 'react'
 interface SecondaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large'
   children: React.ReactNode
+  onClick?: () => void
 }
 
 export const SecondaryButton: React.FC<SecondaryButtonProps> = ({
