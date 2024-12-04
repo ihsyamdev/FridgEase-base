@@ -3,7 +3,7 @@ import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 
 interface TemplateProps {
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const Template: React.FC<TemplateProps> = ({ children }) => {
