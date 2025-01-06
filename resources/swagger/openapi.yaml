@@ -1,0 +1,250 @@
+openapi: 3.0.0
+info:
+  title: Your API Name
+  description: This is the API documentation for your application.
+  version: 0.7.0
+servers:
+  - url: http://localhost:8000
+    description: Local Development Server
+
+paths:
+  /users/signup:
+    post:
+      summary: ユーザの新規登録
+      description: ユーザを新規登録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test@example.com
+      responses:
+        '201':
+          description: ユーザの新規登録が成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: AbCdE12345
+                  email:
+                    type: string
+                    example: test@example.com
+        '400':
+          description: ユーザの新規登録が失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザの新規登録に失敗しました
+  /users/signin:
+    post:
+      summary: ユーザのログイン
+      description: ユーザでログインする
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test@example.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: ユーザのログインが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: AbCdEfG1234567
+        '400':
+          description: ユーザのログインが失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザの新規登録に失敗しました
+  /users/signout:
+    post:
+      summary: ユーザのログアウト
+      description: ユーザがログアウトする
+      responses:
+        '200':
+          description: ログアウトが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ログアウトしました
+# パスワード変更
+  /users/password:
+    put:
+      summary: パスワード変更
+      description: パスワードを変更する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: password
+                newPassword:
+                  type: string
+                  example: newPassword
+      responses:
+        '200':
+          description: パスワード変更が成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワードを変更しました
+        '400':
+          description: パスワード変更が失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワード変更に失敗しました
+  /users/{id}:
+    get:
+      summary: ユーザの情報取得
+      description: ユーザの情報を取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ユーザID
+          schema:
+            type: string
+            example: AbCdE12345
+      responses:
+        '200':
+          description: ユーザの情報取得が成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: AbCdE12345
+                  email:
+                    type: string
+                    example:
+        '400':
+          description: ユーザの情報取得が失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザの情報取得に失敗しました
+  /users:
+    get:
+      summary: ユーザ一覧取得
+      description: ユーザ一覧を取得する
+      responses:
+        '200':
+          description: ユーザ一覧取得が成功した場合
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: AbCdE12345
+                    email:
+                      type: string
+                      example:
+
+  /ingredients:
+    post:
+      summary: 食材の新規登録
+      description: 食材の情報を新規登録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: トマト
+                  quantity:
+                    type: string
+                    example: 2個
+                  expirationDate:
+                    type: string
+                    example: 2021-12-31
+                  unitprice:
+                    type: string
+                    example: 100
+      responses:
+        '200':
+          description: 食材の新規登録が成功した場合
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: AbCdE12345
+                        name:
+                          type: string
+                          example: トマト
+                        quantity:
+                          type: string
+                          example: 2個
+                        expirationDate:
+                          type: string
+                          example: 2021-12-31
+                        unitprice:
+                          type: string
+                          example: 100
