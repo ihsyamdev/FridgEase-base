@@ -194,3 +194,57 @@ paths:
                     email:
                       type: string
                       example:
+
+  /ingredients:
+    post:
+      summary: 食材の新規登録
+      description: 食材の情報を新規登録する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: トマト
+                  quantity:
+                    type: string
+                    example: 2個
+                  expirationDate:
+                    type: string
+                    example: 2021-12-31
+                  unitprice:
+                    type: string
+                    example: 100
+      responses:
+        '200':
+          description: 食材の新規登録が成功した場合
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: AbCdE12345
+                        name:
+                          type: string
+                          example: トマト
+                        quantity:
+                          type: string
+                          example: 2個
+                        expirationDate:
+                          type: string
+                          example: 2021-12-31
+                        unitprice:
+                          type: string
+                          example: 100
