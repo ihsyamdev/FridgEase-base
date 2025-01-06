@@ -99,3 +99,98 @@ paths:
                   message:
                     type: string
                     example: ログアウトしました
+# パスワード変更
+  /users/password:
+    put:
+      summary: パスワード変更
+      description: パスワードを変更する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: password
+                newPassword:
+                  type: string
+                  example: newPassword
+      responses:
+        '200':
+          description: パスワード変更が成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワードを変更しました
+        '400':
+          description: パスワード変更が失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: パスワード変更に失敗しました
+  /users/{id}:
+    get:
+      summary: ユーザの情報取得
+      description: ユーザの情報を取得する
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ユーザID
+          schema:
+            type: string
+            example: AbCdE12345
+      responses:
+        '200':
+          description: ユーザの情報取得が成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: AbCdE12345
+                  email:
+                    type: string
+                    example:
+        '400':
+          description: ユーザの情報取得が失敗した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: ユーザの情報取得に失敗しました
+  /users:
+    get:
+      summary: ユーザ一覧取得
+      description: ユーザ一覧を取得する
+      responses:
+        '200':
+          description: ユーザ一覧取得が成功した場合
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: AbCdE12345
+                    email:
+                      type: string
+                      example:
