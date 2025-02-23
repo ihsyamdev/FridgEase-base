@@ -19,9 +19,15 @@ paths:
             schema:
               type: object
               properties:
+                name:
+                  type: string
+                  example: testUser
                 email:
                   type: string
                   example: test@example.com
+                password:
+                  type: string
+                  example: password
       responses:
         '201':
           description: ユーザの新規登録が成功した場合
