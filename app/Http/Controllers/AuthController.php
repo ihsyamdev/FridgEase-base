@@ -69,11 +69,11 @@ class AuthController extends Controller
                     'message' => 'ユーザーが見つかりません'
                 ], 401);
             }
-            // $token = $user->createToken('auth_token')->plainTextToken;
+            $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
                 'message' => 'ログインしました',
                 'user' => new UserResource($user),
-                // 'token' => $token,
+                'token' => $token,
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

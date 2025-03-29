@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // /エンドポイントをCSRF対応から除外
         $middleware->validateCsrfTokens(except: ['/user']);
-        $middleware->validateCsrfTokens(except: ['/auth']);
+        $middleware->validateCsrfTokens(except: ['/auth/*']);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
