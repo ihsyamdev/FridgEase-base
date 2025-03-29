@@ -1,8 +1,18 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-// すべてのリクエストをReactにリダイレクト
-Route::get('/{any}', function () {
+// ユーザー関連エンドポイント
+Route::get('/users/{display_id}', [UserController::class, 'get']);
+Route::get('/users', [UserController::class, 'getAll']);
+
+// 認証関連エンドポイント
+Route::post('/auth/signup', [AuthController::class, 'signUp']);
+Route::post('/auth/signin', [AuthController::class, 'signIn']);
+Route::post('/auth/signout', [AuthController::class, 'signOut']);
+
+Route::get('/', function () {
     return view('welcome');
 })->where('any', '.*');
