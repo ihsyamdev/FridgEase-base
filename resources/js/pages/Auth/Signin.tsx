@@ -3,6 +3,34 @@ import { Template } from '../../components/Template'
 import { PrimaryButton } from '../../components/PrimaryButton'
 
 export const SignIn: React.FC = () => {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSignIn = async () => {
+    try {
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, password})
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        sessionStorage.setItem('token', data.token)        
+      } else {
+        console.error(response)
+        sessionStorage.removeItem('token')
+      }
+    } catch(error) {
+      console.error(error)
+      sessionStorage.removeItem('token')
+    }
+  }
+
   return (
     <Template>
       <div className='w-2/4 mx-auto'>
@@ -10,7 +38,12 @@ export const SignIn: React.FC = () => {
           ログイン
         </h1>
         <div>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSignIn()
+            }}
+          >
             <table className='w-full'>
               <tr>
                 <th
@@ -29,6 +62,8 @@ export const SignIn: React.FC = () => {
                     type='email'
                     id='email'
                     name='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </td>
               </tr>
@@ -47,6 +82,8 @@ export const SignIn: React.FC = () => {
                     type='password'
                     id='password'
                     name='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </td>
               </tr>
@@ -61,7 +98,7 @@ export const SignIn: React.FC = () => {
             </a>
           </div>
           <div className='justify-center flex mt-10'>
-            <PrimaryButton onClick={() => {alert('ログインしました')}}>
+            <PrimaryButton onClick={handleSignIn}>
               ログイン
             </PrimaryButton>
           </div>
