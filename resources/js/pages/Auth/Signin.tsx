@@ -5,34 +5,66 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 export const SignIn: React.FC = () => {
   return (
     <Template>
-      <div className='w-3/4 mx-auto'>
-        <h1 className='text-center font-bold text-xl my-5'>
+      <div className='w-2/4 mx-auto'>
+        <h1 className='text-center font-bold text-2xl my-5'>
           ログイン
         </h1>
         <div>
           <form>
-            <table>
+            <table className='w-full'>
               <tr>
-                <th>
-                  <label htmlFor='email'>メールアドレス</label>
+                <th
+                  className='text-right py-5'
+                >
+                  <label
+                    className='mr-5'
+                    htmlFor='email'
+                  >
+                    メールアドレス
+                  </label>
                 </th>
                 <td>
-                  <input type='email' id='email' name='email' />
+                  <input 
+                    className='border border-gray-300 rounded w-full py-1 my-2'
+                    type='email'
+                    id='email'
+                    name='email'
+                  />
                 </td>
               </tr>
               <tr>
-                <th>
-                  <label htmlFor='password'>パスワード</label>
+                <th className='text-right py-5'>
+                  <label
+                    className='mr-5'
+                    htmlFor='password'
+                  >
+                    パスワード
+                  </label>
                 </th>
                 <td>
-                  <input type='password' id='password' name='password' />
+                  <input
+                    className='border border-gray-300 rounded w-full py-1 my-2'
+                    type='password'
+                    id='password'
+                    name='password'
+                  />
                 </td>
               </tr>
             </table>
           </form>
-          <PrimaryButton onClick={() => {alert('ログインしました')}}>
-            ログイン
-          </PrimaryButton>
+          <div className='text-right'>
+            <a
+              href='/auth/password/reset'
+              className='text-blue-500 underline hover: cursor-pointer'
+            >
+              パスワードを忘れた方はこちら
+            </a>
+          </div>
+          <div className='justify-center flex mt-10'>
+            <PrimaryButton onClick={() => {alert('ログインしました')}}>
+              ログイン
+            </PrimaryButton>
+          </div>
         </div>
       </div>
     </Template>
