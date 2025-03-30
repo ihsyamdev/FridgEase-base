@@ -8,7 +8,8 @@ interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   size = 'medium',
-  children
+  children,
+  onClick
 }) => {
   const sizeClass = () => {
     switch (size) {
@@ -24,6 +25,7 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <button
       // sizeに応じてクラスを変更
       className={`text-white bg-blue-500 rounded hover:bg-blue-600 ${sizeClass()}`}
+      onClick={onClick}
     >
       { children }
     </button>

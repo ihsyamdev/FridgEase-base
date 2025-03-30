@@ -11,9 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // /エンドポイントをCSRF対応から除外
-        $middleware->validateCsrfTokens(except: ['/user']);
-        $middleware->validateCsrfTokens(except: ['/auth/*']);
+        // APIエンドポイントをCSRF対応から除外
+        // TODO: CSRF対応を実装する
+        $middleware->validateCsrfTokens(except: ['/api/*']);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
