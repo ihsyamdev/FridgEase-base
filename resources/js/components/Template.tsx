@@ -38,7 +38,7 @@ export const Template: React.FC<TemplateProps> = ({ children }) => {
           onClick={ toggleSidebar }
         ></div>
       )}
-      <main className={`transition-transform ${ isSidebarOpen ? 'ml-64': '' }`}>
+      <main className={`transition-transform ${ isSidebarOpen ? '': '' }`}>
         { children}
       </main>
     </div>
