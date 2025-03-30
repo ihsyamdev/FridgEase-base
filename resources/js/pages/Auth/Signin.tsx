@@ -8,6 +8,15 @@ export const SignIn: React.FC = () => {
   const [password, setPassword] = useState('')
 
   const handleSignIn = async () => {
+    if (!email || !password) {
+      alert('メールアドレスとパスワードを入力してください')
+      return
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      alert('正しい形式のメールアドレスを入力してください')
+      return
+    }
+
     try {
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
@@ -44,50 +53,28 @@ export const SignIn: React.FC = () => {
               handleSignIn()
             }}
           >
-            <table className='w-full'>
-              <tr>
-                <th
-                  className='text-right py-5'
-                >
-                  <label
-                    className='mr-5'
-                    htmlFor='email'
-                  >
-                    メールアドレス
-                  </label>
-                </th>
-                <td>
-                  <input 
-                    className='border border-gray-300 rounded w-full py-1 my-2'
-                    type='email'
-                    id='email'
-                    name='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th className='text-right py-5'>
-                  <label
-                    className='mr-5'
-                    htmlFor='password'
-                  >
-                    パスワード
-                  </label>
-                </th>
-                <td>
-                  <input
-                    className='border border-gray-300 rounded w-full py-1 my-2'
-                    type='password'
-                    id='password'
-                    name='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </td>
-              </tr>
-            </table>
+            <div className='mb-5'>
+              <label htmlFor='email'>メールアドレス</label>
+              <input
+                type='email'
+                id='email'
+                name='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='w-full border border-gray-300 rounded-lg p-2'
+              />
+            </div>
+            <div className='mb-5'>
+              <label htmlFor='password'>パスワード</label>
+              <input
+                type='password'
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className='w-full border border-gray-300 rounded-lg p-2'
+              />
+            </div>
           </form>
           <div className='text-right'>
             <a
