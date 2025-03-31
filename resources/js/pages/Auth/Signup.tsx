@@ -113,17 +113,9 @@ export const SignUp: React.FC = () => {
               />
             </div>
           </form>
-          <div className='text-right'>
-            <a
-              href='/auth/password/reset'
-              className='text-blue-500 underline hover: cursor-pointer'
-            >
-              パスワードを忘れた方はこちら
-            </a>
-          </div>
           <div className='justify-center flex mt-10'>
             <PrimaryButton onClick={handleSignUp}>
-              ログイン
+              ユーザー登録
             </PrimaryButton>
           </div>
         </div>
