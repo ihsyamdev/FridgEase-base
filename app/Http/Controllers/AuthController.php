@@ -38,9 +38,11 @@ class AuthController extends Controller
                 'password' => Hash::make($validated['password'])
             ]);
 
+            $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
                 'message' => 'ユーザーが登録されました',
                 'user' => new UserResource($user),
+                'token' => $token,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([

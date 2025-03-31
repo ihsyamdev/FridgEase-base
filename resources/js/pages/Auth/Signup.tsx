@@ -34,7 +34,12 @@ export const SignUp: React.FC = () => {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({userName, email, password, passwordConfirmation})
+        body: JSON.stringify({
+          "name": {userName}.userName,
+          email,
+          password,
+          "password_confirmation": {passwordConfirmation}.passwordConfirmation
+        })
       })
 
       if (response.ok) {
