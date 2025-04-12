@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Template } from '../../components/Template'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { AuthContext } from '../../AuthProvider'
 
 export const SignIn: React.FC = () => {
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const authContext = useContext(AuthContext)
+  const { signIn } = authContext
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -16,27 +18,10 @@ export const SignIn: React.FC = () => {
       alert('正しい形式のメールアドレスを入力してください')
       return
     }
-
-    try {
-      const response = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({email, password})
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        sessionStorage.setItem('token', data.token)        
-      } else {
-        console.error(response)
-        sessionStorage.removeItem('token')
-      }
-    } catch(error) {
-      console.error(error)
-      sessionStorage.removeItem('token')
+    if (signIn) {
+      await signIn(email, password)
+    } else {
+      alert('サインイン機能が利用できません')
     }
   }
 

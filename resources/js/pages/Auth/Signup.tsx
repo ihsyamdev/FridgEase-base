@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Template } from '../../components/Template'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { AuthContext } from '../../AuthProvider'
 
 export const SignUp: React.FC = () => {
-
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setpasswordConfirmation] = useState('')
+  const authContext = useContext(AuthContext)!
+  const { signUp } = authContext
 
   const handleSignUp = async () => {
     if (!userName || !email || !password) {
@@ -27,31 +29,10 @@ export const SignUp: React.FC = () => {
       return
     }
 
-    try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "name": {userName}.userName,
-          email,
-          password,
-          "password_confirmation": {passwordConfirmation}.passwordConfirmation
-        })
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        sessionStorage.setItem('token', data.token)        
-      } else {
-        console.error(response)
-        sessionStorage.removeItem('token')
-      }
-    } catch(error) {
-      console.error(error)
-      sessionStorage.removeItem('token')
+    if (signUp) {
+      await signUp(userName, email, password, passwordConfirmation)
+    } else {
+      alert('サインアップ機能が利用できません')
     }
   }
 
