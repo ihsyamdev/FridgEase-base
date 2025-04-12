@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const AccountButton: React.FC = () => {
   return (
-    <Link to="/account">
+    <Link to="/my-profile">
       <AccountCircleIcon sx={{ fontSize: 64 }} />
     </Link>
   )
