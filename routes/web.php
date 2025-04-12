@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 // API関連エンドポイント
 Route::prefix('api')->group(function () {
     // ユーザー関連エンドポイント
+    Route::middleware('auth:sanctum')->get('/users/me', [UserController::class, 'getMe']);
     Route::get('/users/{display_id}', [UserController::class, 'get']);
     Route::get('/users', [UserController::class, 'getAll']);
     // 認証関連エンドポイント
@@ -17,5 +18,5 @@ Route::prefix('api')->group(function () {
 
 // ページ関連エンドポイント。SPAのため、全てのリクエストをReactに渡す
 Route::get('/{any}', function () {
-    return view('welcome');
+    return view('app');
 })->where('any', '.*');

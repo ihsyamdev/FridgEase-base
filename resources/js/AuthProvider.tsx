@@ -37,6 +37,27 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     return response
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      fetchWithAuth('/api/users/me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setUser(data.user)
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error)
+          setUser(null)
+      })
+    }
+  })
+
   const signUp = async(name: string, email: string, password: string, password_confirmation: string) => {
     const response = await fetch('/api/auth/signup', {
       method: 'POST',
