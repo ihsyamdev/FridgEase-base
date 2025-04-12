@@ -14,6 +14,7 @@ Route::prefix('api')->group(function () {
     Route::post('/auth/signup', [AuthController::class, 'signUp']);
     Route::post('/auth/signin', [AuthController::class, 'signIn']);
     Route::post('/auth/signout', [AuthController::class, 'signOut']);
+    Route::middleware('auth:sanctum')->post('auth/password/reset', [AuthController::class, 'resetPassword']);
 });
 
 // ページ関連エンドポイント。SPAのため、全てのリクエストをReactに渡す

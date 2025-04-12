@@ -99,4 +99,38 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function resetPassword(Request $request): JsonResponse
+    {
+        $validated = request()->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|confirmed',
+        ], [
+            'current_password.required' => '現在のパスワードは必須です',
+            'new_password.required' => '新しいパスワードは必須です',
+            'new_password.min' => '新しいパスワードは8文字以上で入力してください',
+            'new_password.regex' => '新しいパスワードは英大文字、英小文字、数字をそれぞれ1文字以上含めてください',
+            'new_password.confirmed' => '新しいパスワードが一致しません',
+        ]);
+
+        try {
+            $user = $request->user();
+            if (!Hash::check($validated['current_password'], $user->password)) {
+                return response()->json([
+                    'message' => '現在のパスワードが正しくありません'
+                ], 401);
+            }
+            $user->password = Hash::make($validated['new_password']);
+            $user->save();
+
+            return response()->json([
+                'message' => 'パスワードが変更されました',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'パスワード変更に失敗しました',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
 }
