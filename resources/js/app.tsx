@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Template } from './components/Template';
 import { IngredientsCreate } from './pages/ingredients/IngredientsCreate';
 import { AuthProvider } from './AuthProvider';
+import { ProtectedRoute } from './routes/ProtectedRoute';
 import { MyProfile } from './pages/users/MyProfile';
 import { SignIn } from './pages/auth/Signin';
 import { SignUp } from './pages/auth/Signup';
@@ -22,10 +23,14 @@ if (appElement) {
           <Route path='/' element={<Template />} />
           <Route path='/ingredients-create' element={<IngredientsCreate />} />
           {/* 認証関連ページ */}
-          <Route path='/login' element={<SignIn />} />
+          <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           {/* ユーザー関連ページ */}
-          <Route path='/my-profile' element={<MyProfile />} />
+          <Route path='/my-profile' element={
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
+          } />
         </Routes>
       </Router>
     </AuthProvider>
