@@ -11,6 +11,7 @@ interface AuthContextType {
   signUp: (name: string, email: string, password: string, password_confirmation: string) => Promise<void>
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
+  changePassword: (currentPassword: string, newPassword: string, newPasswordConfirmation: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType| undefined>(undefined)
@@ -106,8 +107,26 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setUser(null)
   }
 
+  const changePassword = async(currentPassword: string, newPassword: string, newPasswordConfirmation: string) => {
+    const response = await fetchWithAuth('/api/auth/password/reset', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        current_password: currentPassword,
+        new_password: newPassword,
+        new_password_confirmation: newPasswordConfirmation,
+      }),
+    })
+    if (!response.ok) {
+      console.error('Error changing password:', response.statusText)
+      throw new Error('Failed to change password')
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signUp, signIn, signOut, changePassword }}>
       {children}
     </AuthContext.Provider>
   )
