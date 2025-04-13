@@ -7,6 +7,7 @@ import { IngredientsCreate } from './pages/ingredients/IngredientsCreate';
 import { AuthProvider } from './AuthProvider';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { MyProfile } from './pages/users/MyProfile';
+import { ChangePassword } from './pages/auth/ChangePassword';
 import { SignIn } from './pages/auth/Signin';
 import { SignUp } from './pages/auth/Signup';
 import '../css/app.css';
@@ -29,6 +30,11 @@ if (appElement) {
           <Route path='/my-profile' element={
             <ProtectedRoute>
               <MyProfile />
+            </ProtectedRoute>
+          } />
+          <Route path='/change-password' element={
+            <ProtectedRoute>
+              <ChangePassword />
             </ProtectedRoute>
           } />
         </Routes>
