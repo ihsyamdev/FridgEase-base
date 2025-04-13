@@ -7,7 +7,7 @@ export const SignIn: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const authContext = useContext(AuthContext)
-  const { signIn } = authContext
+  const { signIn } = authContext!
 
   const handleSignIn = async () => {
     if (!email || !password) {

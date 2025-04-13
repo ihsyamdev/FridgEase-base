@@ -9,7 +9,7 @@ export const SignUp: React.FC = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setpasswordConfirmation] = useState('')
   const authContext = useContext(AuthContext)!
-  const { signUp } = authContext
+  const { signUp } = authContext!
 
   const handleSignUp = async () => {
     if (!userName || !email || !password) {
