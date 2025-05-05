@@ -26,19 +26,11 @@ class UserController
     }
   }
 
-  public function get(string $display_id): JsonResponse
+  public function get(User $user): JsonResponse
   {
-    try {
-      $user = User::where('display_id', $display_id)->firstOrFail();
-      return response()->json([
-        'user' => new UserResource($user),
-      ], 200);
-    } catch (\Exception $e) {
-      return response()->json([
-        'message' => 'ユーザーが見つかりません',
-        'error' => $e->getMessage(),
-      ], 404);
-    }
+    return response()->json([
+      'user' => new UserResource($user),
+    ], 200);
   }
 
   public function getAll(): JsonResponse
@@ -54,5 +46,10 @@ class UserController
         'error' => $e->getMessage(),
       ], 404);
     }
+  }
+
+  public function getIngredients(User $user): JsonResponse
+  {
+    return response()->json($user->ingredients);
   }
 }
