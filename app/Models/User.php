@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use App\Domain\Ingredient\Ingredient;
 
 class User extends Authenticatable
 {
@@ -62,5 +63,15 @@ class User extends Authenticatable
                 $user->display_id = Str::random(10);
             } while (User::where('display_id', $user->display_id)->exists());
         });
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'display_id';
+    }
+
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredient::class);
     }
 }
